@@ -1,0 +1,42 @@
+{
+    "version": "146.0.7680.177.5",
+    "description": "Stealth Chromium with source-level fingerprint patches. Drop-in Playwright replacement.",
+    "homepage": "https://github.com/CloakHQ/CloakBrowser",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/CloakHQ/CloakBrowser/releases/download/chromium-v146.0.7680.177.5/cloakbrowser-windows-x64.zip",
+            "hash": "b213795cb32c3169f766c74ce1d0275fc89d3df256de39c04da7fb4c23b7fdbe"
+        }
+    },
+    "bin": [
+        [
+            "chrome.exe",
+            "cloakbrowser",
+            "--user-data-dir=\"$dir\\User Data\""
+        ]
+    ],
+    "shortcuts": [
+        [
+            "chrome.exe",
+            "CloakBrowser",
+            "--user-data-dir=\"$dir\\User Data\""
+        ]
+    ],
+    "persist": "User Data",
+    "checkver": {
+        "github": "https://github.com/CloakHQ/CloakBrowser",
+        "regex": "chromium-v([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/CloakHQ/CloakBrowser/releases/download/chromium-v$version/cloakbrowser-windows-x64.zip"
+            }
+        },
+        "hash": {
+            "url": "https://github.com/CloakHQ/CloakBrowser/releases/download/chromium-v$version/SHA256SUMS",
+            "regex": "([a-f0-9]{64})\\s+cloakbrowser-windows-x64.zip"
+        }
+    }
+}
