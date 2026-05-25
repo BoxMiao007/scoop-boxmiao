@@ -16,9 +16,11 @@
     "shortcuts": [
         [
             "DickHelper.exe",
-            "DickHelper"
+            "DickHelper",
+            "--user-data-dir=\"$dir\\User Data\""
         ]
     ],
+    "persist": "User Data",
     "checkver": {
         "github": "https://github.com/zzzdajb/DickHelper"
     },
