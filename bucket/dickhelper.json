@@ -1,0 +1,32 @@
+{
+    "version": "2.0.4",
+    "description": "简洁易用的健康管理工具",
+    "homepage": "https://github.com/zzzdajb/DickHelper",
+    "license": "GPL-3.0-only",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/zzzdajb/DickHelper/releases/download/v2.0.4/DickHelper.Setup.2.0.4.exe#/dl.7z",
+            "hash": "afa37f8c4996117ac1199cbfbec1c7d94c9cc49abd0d11509de8e53b41b7bdae",
+            "pre_install": [
+                "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\"",
+                "Remove-Item \"$dir\\`$*\", \"$dir\\Uninstall*\" -Recurse -Force -ErrorAction SilentlyContinue"
+            ]
+        }
+    },
+    "shortcuts": [
+        [
+            "DickHelper.exe",
+            "DickHelper"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/zzzdajb/DickHelper"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/zzzdajb/DickHelper/releases/download/v$version/DickHelper.Setup.$version.exe#/dl.7z"
+            }
+        }
+    }
+}

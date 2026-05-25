@@ -43,6 +43,7 @@ scoop uninstall cloakbrowser
 | 应用 | 说明 |
 |------|------|
 | [cloakbrowser](bucket/cloakbrowser.json) | 隐身 Chromium 浏览器，源码级指纹补丁，通过所有反检测测试 |
+| [dickhelper](bucket/dickhelper.json) | 简洁易用的健康管理工具 |
 
 ## 自动更新
 
