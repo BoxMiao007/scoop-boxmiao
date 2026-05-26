@@ -24,7 +24,9 @@
         "        Remove-Item $appdataDir -Recurse -Force",
         "    } else { Remove-Item $appdataDir -Force }",
         "}",
-        "New-Item -ItemType Junction -Path $appdataDir -Target $persist_dir | Out-Null"
+        "New-Item -ItemType Junction -Path $appdataDir -Target $persist_dir | Out-Null",
+        "# 在应用目录创建快捷链接，方便跳转",
+        "New-Item -ItemType Junction -Path \"$dir\\User Data\" -Target $persist_dir -Force | Out-Null"
     ],
     "pre_uninstall": [
         "$appdataDir = \"$env:APPDATA\\dickhelper\"",
