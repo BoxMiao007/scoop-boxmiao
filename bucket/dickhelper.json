@@ -46,7 +46,7 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/zzzdajb/DickHelper/releases/download/v$version/DickHelper-$version-windows-x64.exe#/dl.7z"
+                "url": "https://github.com/zzzdajb/DickHelper/releases/download/desktop-v$version/DickHelper-$version-windows-x64.exe#/dl.7z"
             }
         }
     }
