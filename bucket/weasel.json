@@ -1,0 +1,26 @@
+{
+    "version": "0.17.4.0",
+    "description": "小狼毫输入法 - RIME 输入法引擎的 Windows 发行版",
+    "homepage": "https://rime.im",
+    "license": "GPL-3.0-only",
+    "url": "https://github.com/rime/weasel/releases/download/0.17.4/weasel-0.17.4.0-installer.exe",
+    "hash": "cf509534a8f5f8af9c98ed7cbb8f135439f145a8cbe7e50ede42bb5b5ab45c29",
+    "installer": {
+        "args": ["/S"]
+    },
+    "uninstaller": {
+        "script": [
+            "$weaselDir = \"$env:ProgramFiles\\Rime\\weasel-$version\"",
+            "if (Test-Path \"$weaselDir\\uninstall.exe\") {",
+            "    Start-Process \"$weaselDir\\uninstall.exe\" -ArgumentList '/S' -Wait",
+            "}"
+        ]
+    },
+    "checkver": {
+        "github": "https://github.com/rime/weasel",
+        "regex": "weasel-([\\d.]+)-installer\\.exe"
+    },
+    "autoupdate": {
+        "url": "https://github.com/rime/weasel/releases/download/$majorVersion.$minorVersion.$patchVersion/weasel-$version-installer.exe"
+    }
+}
