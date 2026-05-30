@@ -42,9 +42,9 @@ scoop uninstall cloakbrowser
 
 | 应用 | 说明 |
 |------|------|
-| [cc-switch](bucket/cc-switch.json) | AI 编程助手统一管理工具，支持 Claude Code / Codex / OpenCode / OpenClaw / Gemini CLI |
-| [cloakbrowser](bucket/cloakbrowser.json) | 隐身 Chromium 浏览器，源码级指纹补丁，通过所有反检测测试 |
-| [dickhelper](bucket/dickhelper.json) | 简洁易用的健康管理工具 |
+| [cc-switch](https://github.com/farion1231/cc-switch) | AI 编程助手统一管理工具，支持 Claude Code / Codex / OpenCode / OpenClaw / Gemini CLI |
+| [cloakbrowser](https://github.com/CloakHQ/CloakBrowser) | 隐身 Chromium 浏览器，源码级指纹补丁，通过所有反检测测试 |
+| [dickhelper](https://github.com/zzzdajb/DickHelper) | 简洁易用的健康管理工具 |
 
 ## 自动更新
 
