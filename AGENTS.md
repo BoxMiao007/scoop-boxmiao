@@ -24,7 +24,7 @@
 
 对于数据存储在 `%USERPROFILE%\.<app>` 的应用，通过 Junction 链接到 Scoop persist 目录，实现 Scoop 托管数据生命周期：
 
-- `pre_install` — 创建 Junction（`%USERPROFILE%\.<app>` → `$persist_dir`）
+- `pre_install` — 先创建 `$persist_dir` 目录，再创建 Junction（`%USERPROFILE%\.<app>` → `$persist_dir`），因为 `pre_install` 执行时 persist 目录尚未自动创建
 - `uninstaller` — 删除 Junction，保留 persist 数据
 
 ## 提交规范
