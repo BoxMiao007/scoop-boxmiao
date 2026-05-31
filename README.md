@@ -45,6 +45,7 @@ scoop uninstall cloakbrowser
 | [cc-switch](https://github.com/farion1231/cc-switch) | AI 编程助手统一管理工具，支持 Claude Code / Codex / OpenCode / OpenClaw / Gemini CLI |
 | [cloakbrowser](https://github.com/CloakHQ/CloakBrowser) | 隐身 Chromium 浏览器，源码级指纹补丁，通过所有反检测测试 |
 | [dickhelper](https://github.com/zzzdajb/DickHelper) | 简洁易用的健康管理工具 |
+| [Rscoop](https://github.com/AmarBego/Rscoop) | Scoop 的桌面应用程序。无需进入终端即可搜索、安装、更新和管理 Windows 软件包 |
 
 ## 自动更新
 
