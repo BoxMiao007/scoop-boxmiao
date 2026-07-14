@@ -1,10 +1,10 @@
 {
-    "version": "3.16.5",
+    "version": "3.17.0",
     "description": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Gemini CLI & Hermes Agent",
     "homepage": "https://ccswitch.io",
     "license": "MIT",
-    "url": "https://github.com/farion1231/cc-switch/releases/download/v3.16.5/CC-Switch-v3.16.5-Windows.msi",
-    "hash": "3a29982008bbf0419999df59ad2bdbf545c3b2bb29d87f2594f260ecacc22346",
+    "url": "https://github.com/farion1231/cc-switch/releases/download/v3.17.0/CC-Switch-v3.17.0-Windows.msi",
+    "hash": "c541e1981023cc5cfe4d8357ce9c57a712eb8949bf2ae8cd49b087c75762607b",
     "notes": "数据目录已持久化到 Scoop persist 目录，通过 Junction 链接到 %USERPROFILE%\\.cc-switch。官方网站: https://ccswitch.io",
     "installer": {
         "script": [
