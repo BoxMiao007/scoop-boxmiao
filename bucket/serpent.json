@@ -1,0 +1,60 @@
+{
+    "version": "0.2.6",
+    "description": "开源跨平台数字资产管理软件，面向游戏美术、影视后期与平面/动态图形设计",
+    "homepage": "https://serpent.dolag.work",
+    "license": "MIT",
+    "notes": "便携版。配置、插件与最近资源库列表通过 Junction 持久化到 Scoop persist 目录（%APPDATA%\\Serpent）。资源库文件仍保留在创建时选择的位置。未签名版本首次运行可能触发 SmartScreen，选择「更多信息 → 仍要运行」。",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/dolag233/Serpent/releases/download/v0.2.6/Serpent-win-x86-64-0.2.6-portable.zip",
+            "hash": "0ac077d217f4b14d6be03d90031161a937070c1eb895ed362f3199de44499ba3"
+        }
+    },
+    "post_install": [
+        "$target = $persist_dir",
+        "$link = \"$env:APPDATA\\Serpent\"",
+        "if (!(Test-Path $target)) { New-Item -ItemType Directory -Path $target -Force | Out-Null }",
+        "if (Test-Path $link) {",
+        "    $item = Get-Item $link -Force",
+        "    if ($item.LinkType -eq 'Junction' -and $item.Target -eq $target) {",
+        "        Write-Host 'Junction 已存在，跳过'",
+        "    } elseif ($item.LinkType -eq 'Junction') {",
+        "        Remove-Item $link -Force",
+        "        New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
+        "    } else {",
+        "        Get-ChildItem $link -Force | Move-Item -Destination $target -Force",
+        "        Remove-Item $link -Recurse -Force",
+        "        New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
+        "    }",
+        "} else {",
+        "    New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
+        "}"
+    ],
+    "pre_uninstall": [
+        "$link = \"$env:APPDATA\\Serpent\"",
+        "if ((Get-Item $link -Force -ErrorAction SilentlyContinue).LinkType -eq 'Junction') {",
+        "    Remove-Item $link -Force",
+        "}"
+    ],
+    "bin": "Serpent.exe",
+    "shortcuts": [
+        [
+            "Serpent.exe",
+            "Serpent"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/dolag233/Serpent"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/dolag233/Serpent/releases/download/v$version/Serpent-win-x86-64-$version-portable.zip",
+                "hash": {
+                    "url": "https://github.com/dolag233/Serpent/releases/download/v$version/Serpent-win-x86-64-$version-portable.zip.sha256",
+                    "regex": "([a-fA-F0-9]{64})"
+                }
+            }
+        }
+    }
+}
