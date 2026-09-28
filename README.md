@@ -47,6 +47,7 @@ scoop uninstall cloakbrowser
 | [OpenCode Desktop](https://opencode.ai) | 开源 AI 编程智能体 OpenCode 的桌面客户端 |
 | [Rscoop](https://github.com/AmarBego/Rscoop) | Scoop 的桌面应用程序。无需进入终端即可搜索、安装、更新和管理 Windows 软件包 |
 | [Serpent](https://serpent.dolag.work) | 开源数字资产管理软件，面向游戏美术、影视后期与平面/动态图形设计 |
+| [Token Monitor](https://github.com/Javis603/token-monitor) | 本地优先的桌面小组件，汇总 40 余个 AI 编程工具的 Token 用量、费用与额度 |
 
 ## 自动更新
 

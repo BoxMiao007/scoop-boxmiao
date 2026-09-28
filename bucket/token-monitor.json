@@ -1,0 +1,62 @@
+{
+    "version": "0.63.1",
+    "description": "本地优先的桌面小组件，汇总 40 余个 AI 编程工具的 Token 用量、费用与额度",
+    "homepage": "https://github.com/Javis603/token-monitor",
+    "license": "MIT",
+    "notes": "Scoop 解包安装官方 NSIS 安装包，而不是便携单文件。配置位于 %APPDATA%\\Token Monitor，并通过 Junction 持久化到 Scoop persist。请用 scoop update 升级；应用内更新会安装到 Scoop 目录之外。",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Javis603/token-monitor/releases/download/v0.63.1/Token-Monitor-Setup-0.63.1.exe#/dl.7z",
+            "hash": "7715b7db22a5a00c96619665cdb8c18495804a7e50610e239b07b582ea84186e",
+            "pre_install": [
+                "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\"",
+                "Remove-Item \"$dir\\`$*\", \"$dir\\Uninstall*\" -Recurse -Force -ErrorAction SilentlyContinue"
+            ]
+        }
+    },
+    "post_install": [
+        "# 上游 NSIS 会给安装目录授予 S-1-15-2-2 读取权限，否则部分机器上 Chromium 沙箱起不来。Scoop 是解包安装，这里补同样的授权，失败不阻断。",
+        "$icacls = Join-Path $env:SystemRoot 'System32\\icacls.exe'",
+        "if (Test-Path $icacls) { & $icacls $dir /grant '*S-1-15-2-2:(OI)(CI)(RX)' | Out-Null }",
+        "$target = $persist_dir",
+        "$link = \"$env:APPDATA\\Token Monitor\"",
+        "if (!(Test-Path $target)) { New-Item -ItemType Directory -Path $target -Force | Out-Null }",
+        "if (Test-Path $link) {",
+        "    $item = Get-Item $link -Force",
+        "    if ($item.LinkType -eq 'Junction' -and $item.Target -eq $target) {",
+        "        Write-Host 'Junction 已存在，跳过'",
+        "    } elseif ($item.LinkType -eq 'Junction') {",
+        "        Remove-Item $link -Force",
+        "        New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
+        "    } else {",
+        "        Get-ChildItem $link -Force | Move-Item -Destination $target -Force",
+        "        Remove-Item $link -Recurse -Force",
+        "        New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
+        "    }",
+        "} else {",
+        "    New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
+        "}"
+    ],
+    "pre_uninstall": [
+        "$link = \"$env:APPDATA\\Token Monitor\"",
+        "if ((Get-Item $link -Force -ErrorAction SilentlyContinue).LinkType -eq 'Junction') {",
+        "    Remove-Item $link -Force",
+        "}"
+    ],
+    "shortcuts": [
+        [
+            "Token Monitor.exe",
+            "Token Monitor"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/Javis603/token-monitor"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Javis603/token-monitor/releases/download/v$version/Token-Monitor-Setup-$version.exe#/dl.7z"
+            }
+        }
+    }
+}
