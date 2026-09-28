@@ -3,39 +3,13 @@
     "description": "开源跨平台数字资产管理软件，面向游戏美术、影视后期与平面/动态图形设计",
     "homepage": "https://serpent.dolag.work",
     "license": "MIT",
-    "notes": "便携版。配置、插件与最近资源库列表通过 Junction 持久化到 Scoop persist 目录（%APPDATA%\\Serpent）。资源库文件仍保留在创建时选择的位置。未签名版本首次运行可能触发 SmartScreen，选择「更多信息 → 仍要运行」。",
+    "notes": "便携版。未签名版本首次运行可能触发 SmartScreen，选择「更多信息 → 仍要运行」。",
     "architecture": {
         "64bit": {
             "url": "https://github.com/dolag233/Serpent/releases/download/v0.2.9/Serpent-win-x86-64-0.2.9-portable.zip",
             "hash": "3956cb2a4bb3a468317793aa36492beb6a5c3fd537e56b7c08f0ba97cadeb294"
         }
     },
-    "post_install": [
-        "$target = $persist_dir",
-        "$link = \"$env:APPDATA\\Serpent\"",
-        "if (!(Test-Path $target)) { New-Item -ItemType Directory -Path $target -Force | Out-Null }",
-        "if (Test-Path $link) {",
-        "    $item = Get-Item $link -Force",
-        "    if ($item.LinkType -eq 'Junction' -and $item.Target -eq $target) {",
-        "        Write-Host 'Junction 已存在，跳过'",
-        "    } elseif ($item.LinkType -eq 'Junction') {",
-        "        Remove-Item $link -Force",
-        "        New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
-        "    } else {",
-        "        Get-ChildItem $link -Force | Move-Item -Destination $target -Force",
-        "        Remove-Item $link -Recurse -Force",
-        "        New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
-        "    }",
-        "} else {",
-        "    New-Item -ItemType Junction -Path $link -Target $target | Out-Null",
-        "}"
-    ],
-    "pre_uninstall": [
-        "$link = \"$env:APPDATA\\Serpent\"",
-        "if ((Get-Item $link -Force -ErrorAction SilentlyContinue).LinkType -eq 'Junction') {",
-        "    Remove-Item $link -Force",
-        "}"
-    ],
     "bin": "Serpent.exe",
     "shortcuts": [
         [
