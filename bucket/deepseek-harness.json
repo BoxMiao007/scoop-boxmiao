@@ -1,0 +1,44 @@
+{
+    "##": "CDN 固定使用 latest URL 且不发布校验文件，SHA256 无法自动获取，故省略 hash；URL 不随版本变化。",
+    "version": "0.2.0-rc.2",
+    "description": "DeepSeek 开源的 Agent 桌面应用（预览版），基于 Cordis「一切皆插件」架构",
+    "homepage": "https://www.deepseek.com/harness/",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://download.deepseek.com/desktop/dsh-latest-windows-x64.exe#/dl.7z"
+        }
+    },
+    "installer": {
+        "script": [
+            "Get-Item -Path \"$dir\\`$PLUGINSDIR\\app*.7z\" | Expand-7zipArchive -DestinationPath \"$dir\"",
+            "Remove-Item -Path \"$dir\\`$*\", \"$dir\\Uninstall*\" -Recurse -Force"
+        ]
+    },
+    "post_install": [
+        "$yaml = \"$dir\\resources\\app-update.yml\"",
+        "if (Test-Path $yaml) {",
+        "    $content = Get-Content -Path $yaml | ForEach-Object {",
+        "        if ($_.StartsWith('url')) { \"$($_.Replace('url', '# url')) # Disabled by Scoop\" } else { $_ }",
+        "    }",
+        "    Set-Content $yaml -Value $content -Encoding ascii",
+        "}"
+    ],
+    "shortcuts": [
+        [
+            "DeepSeek Harness.exe",
+            "DeepSeek Harness"
+        ]
+    ],
+    "checkver": {
+        "url": "https://github.com/deepseek-ai/deepseek-harness/releases.atom",
+        "regex": "dsh-v([\\w.-]+)</id>"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://download.deepseek.com/desktop/dsh-latest-windows-x64.exe#/dl.7z"
+            }
+        }
+    }
+}
