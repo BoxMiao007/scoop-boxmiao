@@ -1,6 +1,6 @@
 {
     "version": "1.6.0",
-    "description": "Z·SWITCH，管理多个 AI 编程工具账号并快速切换",
+    "description": "在多个 ZCode 账号之间一键切换，自动显示额度",
     "homepage": "https://github.com/pjpv/zcode-switch",
     "license": "MIT",
     "architecture": {
