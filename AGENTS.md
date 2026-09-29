@@ -20,6 +20,37 @@
 - `checkver` — 自动检测版本（优先使用 `github` 方式）
 - `autoupdate` — 自动更新 URL 模板
 
+### 安装包
+
+先看下载物是不是已经能运行的程序。zip、7z、便携 exe 直接用。是安装包时，清单必须装出可运行程序；应用目录里只剩安装包，视为清单错误。
+
+用 `7z l` 看安装包类型，再选下面一种。`url` 和 `autoupdate` 用同一套处理。上游有多个架构时，`architecture` 逐个写上。
+
+**NSIS / electron-builder**（内含 `$PLUGINSDIR\app-64.7z` 或 `app-arm64.7z`）：
+
+1. `url` 加 `#/dl.7z`，让 Scoop 先解开 NSIS 外壳。
+2. `installer.script` 把内层程序解到 `$dir`，再删掉安装器残留：
+
+```powershell
+Get-Item -Path "$dir\`$PLUGINSDIR\app*.7z" | Expand-7zipArchive -DestinationPath "$dir"
+Remove-Item -Path "$dir\`$*", "$dir\Uninstall*" -Recurse -Force
+```
+
+3. `shortcuts`（以及有命令行入口时的 `bin`）指向解出的主程序，不指向安装包。
+4. 有 `resources/app-update.yml` 时，`post_install` 注释掉其中的 `url`，避免应用内更新装到 Scoop 目录之外。文件不存在则跳过：
+
+```powershell
+$yaml = "$dir\resources\app-update.yml"
+if (Test-Path $yaml) {
+    $content = Get-Content -Path $yaml | ForEach-Object {
+        if ($_.StartsWith('url')) { "$($_.Replace('url', '# url')) # Disabled by Scoop" } else { $_ }
+    }
+    Set-Content $yaml -Value $content -Encoding ascii
+}
+```
+
+**必须注册进系统才能用**（输入法、驱动、系统服务）：不解包。`installer.args` 用静默参数（常见 `/S`），`uninstaller.script` 调用安装目录里的卸载程序并等待结束。不要把这类程序留在 Scoop 应用目录里冒充已安装。
+
 ## 提交规范
 
 ### 分支
