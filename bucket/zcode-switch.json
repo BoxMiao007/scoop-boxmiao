@@ -1,0 +1,34 @@
+{
+    "version": "1.6.0",
+    "description": "Z·SWITCH，管理多个 AI 编程工具账号并快速切换",
+    "homepage": "https://github.com/pjpv/zcode-switch",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/pjpv/zcode-switch/releases/download/v1.6.0/zcode-switch_1.6.0_portable.exe",
+            "hash": "d080749a14016969c214c565078e220a0a7d518558afb389835e90feff8aef96"
+        }
+    },
+    "bin": [
+        [
+            "zcode-switch_1.6.0_portable.exe",
+            "zcode-switch"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "zcode-switch_1.6.0_portable.exe",
+            "Z·SWITCH"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/pjpv/zcode-switch"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/pjpv/zcode-switch/releases/download/v$version/zcode-switch_$version_portable.exe"
+            }
+        }
+    }
+}
