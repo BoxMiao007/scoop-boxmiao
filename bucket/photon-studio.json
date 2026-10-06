@@ -1,0 +1,52 @@
+{
+    "version": "0.1.42",
+    "description": "免费的全功能 Photoshop 替代品，支持 PSD/PSB、RAW 处理与本地 AI 功能",
+    "homepage": "https://tenzen.studio/photon/",
+    "license": "Proprietary",
+    "architecture": {
+        "64bit": {
+            "url": "https://downloads.tenzen.studio/photon/stable/win32/0.1.42/Photon-Studio-0.1.42-win-x64.exe#/dl.7z",
+            "hash": "a96bbf2b4df625ce101629048ef561eed669f54ebbb76bceea133a15a2470c1b"
+        },
+        "arm64": {
+            "url": "https://downloads.tenzen.studio/photon/stable/win32/0.1.42/Photon-Studio-0.1.42-win-arm64.exe#/dl.7z",
+            "hash": "2d670a8cff029a95e2ebb79662406f154d293bc32d2c6aee6576ad6df1500e5c"
+        }
+    },
+    "installer": {
+        "script": [
+            "Get-Item -Path \"$dir\\`$PLUGINSDIR\\app*.7z\" | Expand-7zipArchive -DestinationPath \"$dir\"",
+            "Remove-Item -Path \"$dir\\`$*\", \"$dir\\Uninstall*\" -Recurse -Force"
+        ]
+    },
+    "post_install": [
+        "# 关掉内置更新，避免和 Scoop 的版本管理冲突",
+        "$yaml = \"$dir\\resources\\app-update.yml\"",
+        "if (Test-Path $yaml) {",
+        "    $content = Get-Content -Path $yaml | ForEach-Object {",
+        "        if ($_.StartsWith('url')) { \"$($_.Replace('url', '# url')) # Disabled by Scoop\" } else { $_ }",
+        "    }",
+        "    Set-Content $yaml -Value $content -Encoding ascii",
+        "}"
+    ],
+    "shortcuts": [
+        [
+            "Photon Studio.exe",
+            "Photon Studio"
+        ]
+    ],
+    "checkver": {
+        "url": "https://tenzen.studio/api/v1/photon/releases/latest",
+        "jsonpath": "$.version"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://downloads.tenzen.studio/photon/stable/win32/$version/Photon-Studio-$version-win-x64.exe#/dl.7z"
+            },
+            "arm64": {
+                "url": "https://downloads.tenzen.studio/photon/stable/win32/$version/Photon-Studio-$version-win-arm64.exe#/dl.7z"
+            }
+        }
+    }
+}

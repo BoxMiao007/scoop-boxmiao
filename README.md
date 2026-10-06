@@ -66,6 +66,7 @@ scoop uninstall cloakbrowser
 
 | 应用 | 说明 |
 |------|------|
+| [Photon Studio](https://tenzen.studio/photon/) | 免费的全功能 Photoshop 替代品，支持 PSD/PSB、RAW 处理与本地 AI 功能 |
 | [Serpent](https://serpent.dolag.work) | 开源数字资产管理软件，面向游戏美术、影视后期与平面/动态图形设计 |
 
 ## 自动更新
