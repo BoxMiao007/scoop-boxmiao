@@ -54,6 +54,7 @@ scoop uninstall cloakbrowser
 
 | 应用 | 说明 |
 |------|------|
+| [Pebrel](https://github.com/Kuddev/pebrel) | AI 原生 GPU 加速终端模拟器，集成 SSH、持久会话、分屏与 AI CLI 工作流 |
 | [Rscoop](https://github.com/AmarBego/Rscoop) | Scoop 的桌面应用程序。无需进入终端即可搜索、安装、更新和管理 Windows 软件包 |
 
 ### 浏览器
