@@ -1,0 +1,45 @@
+{
+    "version": "2.2.0",
+    "description": "AI 编程工作区，深度集成 OpenCode 智能体引擎",
+    "homepage": "https://openchamber.dev",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/openchamber/openchamber/releases/download/v2.2.0/OpenChamber-2.2.0-win-x64.exe#/dl.7z",
+            "hash": "65fb6f70082af24e80176d8f148ef98ee028029a6f6224a61dae7deb75b4aaf7"
+        }
+    },
+    "installer": {
+        "script": [
+            "Get-Item -Path \"$dir\\`$PLUGINSDIR\\app*.7z\" | Expand-7zipArchive -DestinationPath \"$dir\"",
+            "Remove-Item -Path \"$dir\\`$*\", \"$dir\\Uninstall*\" -Recurse -Force"
+        ]
+    },
+    "post_install": [
+        "# 关掉内置更新，避免和 Scoop 的版本管理冲突",
+        "$yaml = \"$dir\\resources\\app-update.yml\"",
+        "if (Test-Path $yaml) {",
+        "    $content = Get-Content -Path $yaml | ForEach-Object {",
+        "        if ($_.StartsWith('url')) { \"$($_.Replace('url', '# url')) # Disabled by Scoop\" } else { $_ }",
+        "    }",
+        "    Set-Content $yaml -Value $content -Encoding ascii",
+        "}"
+    ],
+    "shortcuts": [
+        [
+            "OpenChamber.exe",
+            "OpenChamber"
+        ]
+    ],
+    "checkver": {
+        "url": "https://github.com/openchamber/openchamber/releases.atom",
+        "regex": "<title>OpenChamber v([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/openchamber/openchamber/releases/download/v$version/OpenChamber-$version-win-x64.exe#/dl.7z"
+            }
+        }
+    }
+}

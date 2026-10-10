@@ -45,6 +45,7 @@ scoop uninstall cloakbrowser
 | 应用 | 说明 |
 |------|------|
 | [DeepSeek Harness](https://www.deepseek.com/harness/) | DeepSeek 开源的 Agent 桌面应用（预览版），基于 Cordis「一切皆插件」架构 |
+| [OpenChamber](https://openchamber.dev) | AI 编程工作区，深度集成 OpenCode 智能体引擎 |
 | [OpenCode Desktop](https://opencode.ai) | 开源 AI 编程智能体 OpenCode 的桌面客户端 |
 | [Token Monitor](https://github.com/Javis603/token-monitor) | 本地优先的桌面小组件，汇总 40 余个 AI 编程工具的 Token 用量、费用与额度 |
 | [ZCode](https://zcode.z.ai) | Z.ai 出品的 AI 编程助手桌面客户端 |
