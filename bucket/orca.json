@@ -1,0 +1,50 @@
+{
+    "version": "1.4.224",
+    "description": "并行驱动多个编码 Agent 的桌面开发环境，可用自有订阅运行 Claude Code、Codex、Cursor 等 Agent",
+    "homepage": "https://onorca.dev",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/stablyai/orca/releases/download/v1.4.224/orca-windows-setup.exe#/dl.7z",
+            "hash": "d192a7f1142b58a8c9bc855275fb37cd41dff7f152fd3cbac3acdd96331ec849"
+        }
+    },
+    "installer": {
+        "script": [
+            "Get-Item -Path \"$dir\\`$PLUGINSDIR\\app*.7z\" | Expand-7zipArchive -DestinationPath \"$dir\"",
+            "Remove-Item -Path \"$dir\\`$*\", \"$dir\\Uninstall*\" -Recurse -Force"
+        ]
+    },
+    "post_install": [
+        "# 关掉内置更新，避免和 Scoop 的版本管理冲突；Orca 走 GitHub provider，没有 url 可注，改为注掉 provider",
+        "$yaml = \"$dir\\resources\\app-update.yml\"",
+        "if (Test-Path $yaml) {",
+        "    $content = Get-Content -Path $yaml | ForEach-Object {",
+        "        if ($_.StartsWith('provider')) { \"$($_.Replace('provider', '# provider')) # Disabled by Scoop\" } else { $_ }",
+        "    }",
+        "    Set-Content $yaml -Value $content -Encoding ascii",
+        "}"
+    ],
+    "bin": [
+        [
+            "resources\\bin\\orca.exe",
+            "orca"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "Orca.exe",
+            "Orca"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/stablyai/orca"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/stablyai/orca/releases/download/v$version/orca-windows-setup.exe#/dl.7z"
+            }
+        }
+    }
+}
