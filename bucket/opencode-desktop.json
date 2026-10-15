@@ -1,12 +1,12 @@
 {
-    "version": "2.0.29",
+    "version": "2.0.30",
     "description": "Desktop app for OpenCode, the open source AI coding agent",
     "homepage": "https://opencode.ai",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://opencode.ai/files/bin/2.0.29/opencode-desktop-win-x64.exe#/dl.7z",
-            "hash": "dc27496a3638e40db8bd21ec8577539ee3be1e812dfb7663333516301709e22e",
+            "url": "https://opencode.ai/files/bin/2.0.30/opencode-desktop-win-x64.exe#/dl.7z",
+            "hash": "4c574f6cdd9d395f92fad6b8f836894c5c6d3dd9998433627164d59b1fa4620a",
             "pre_install": "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\""
         }
     },
