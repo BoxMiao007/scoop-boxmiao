@@ -1,0 +1,49 @@
+{
+    "##": "上游仅发布未签名的独立 exe，资源名不含版本号；发布页同时提供 SHA256SUMS，hash 按架构逐行匹配。",
+    "version": "0.1.1265",
+    "description": "本地 AI 网关：为 Codex、Claude Code 等编码 Agent 统一分配模型与账号，额度用尽自动切换",
+    "homepage": "https://usemagpie.ai",
+    "license": "MIT",
+    "notes": [
+        "Windows 版未签名，首次运行可能出现 SmartScreen 提示。",
+        "magpie 自带后台自更新，会替换程序文件，Scoop 记录的版本随之滞后；需要回到清单版本时执行 scoop update magpie。"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/yetone/magpie/releases/download/v0.1.1265/magpie-windows-amd64.exe#/magpie.exe",
+            "hash": "cdb94ffdc8f4b227716758f9a24c91792bfb4048d40b2b39c61a732bd531cf44"
+        },
+        "arm64": {
+            "url": "https://github.com/yetone/magpie/releases/download/v0.1.1265/magpie-windows-arm64.exe#/magpie.exe",
+            "hash": "19b308e39d9a71a5ff48f977054ecf806495e35b1f9abec92484f3af4ca5e57f"
+        }
+    },
+    "bin": "magpie.exe",
+    "shortcuts": [
+        [
+            "magpie.exe",
+            "magpie"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/yetone/magpie"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/yetone/magpie/releases/download/v$version/magpie-windows-amd64.exe#/magpie.exe",
+                "hash": {
+                    "url": "https://github.com/yetone/magpie/releases/download/v$version/SHA256SUMS",
+                    "regex": "([a-fA-F0-9]{64})\\s+magpie-windows-amd64\\.exe"
+                }
+            },
+            "arm64": {
+                "url": "https://github.com/yetone/magpie/releases/download/v$version/magpie-windows-arm64.exe#/magpie.exe",
+                "hash": {
+                    "url": "https://github.com/yetone/magpie/releases/download/v$version/SHA256SUMS",
+                    "regex": "([a-fA-F0-9]{64})\\s+magpie-windows-arm64\\.exe"
+                }
+            }
+        }
+    }
+}
