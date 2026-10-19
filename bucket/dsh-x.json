@@ -1,0 +1,69 @@
+{
+    "##": "DSH-Setup.exe 是 Rust 包装器，内部包裹完整的 Inno Setup 安装器；包装器静默安装后会自行启动应用并删除安装包，故这里切出内嵌的 Inno 引擎，带 /WEBUI=1 直接执行，安装后清掉 Inno 写入的开始菜单与卸载注册表项，由 Scoop 统一管理。",
+    "version": "0.1.17",
+    "description": "DeepSeek Harness 的多开与多版本管理桌面工具，内嵌官方 Web 界面，支持 MCP 与技能扩展",
+    "homepage": "https://yyh-001.github.io/DSH-X/",
+    "license": "MIT",
+    "notes": "内置更新器会重新运行 DSH-Setup.exe 安装到 Scoop 目录，请改用 scoop update dsh-x 更新。用户数据保存在 %APPDATA%\\DSH，卸载不会删除。",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/yyh-001/DSH-X/releases/download/v0.1.17/DSH-Setup.exe",
+            "hash": "7d89db4a1b599c518ce861588be90152c97b591bed70050e1b8337bd36b21a92"
+        }
+    },
+    "installer": {
+        "script": [
+            "$setup = Join-Path $dir 'DSH-Setup.exe'",
+            "$bytes = [System.IO.File]::ReadAllBytes($setup)",
+            "$offset = -1",
+            "$i = $bytes.Length - 2",
+            "while ($i -ge 0) {",
+            "    $i = [Array]::LastIndexOf($bytes, [byte]0x4D, $i)",
+            "    if ($i -lt 0) { break }",
+            "    if ($i + 0x40 -lt $bytes.Length -and $bytes[$i + 1] -eq 0x5A) {",
+            "        $lfanew = [BitConverter]::ToInt32($bytes, $i + 0x3C)",
+            "        if ($lfanew -gt 0 -and $i + $lfanew + 4 -le $bytes.Length -and $bytes[$i + $lfanew] -eq 0x50 -and $bytes[$i + $lfanew + 1] -eq 0x45) {",
+            "            $offset = $i",
+            "            break",
+            "        }",
+            "    }",
+            "    $i--",
+            "}",
+            "if ($offset -lt 0) { throw 'DSH-Setup.exe: 未找到内嵌的 Inno Setup 安装引擎' }",
+            "$engine = Join-Path $dir 'DSH-Setup-engine.exe'",
+            "$payload = New-Object byte[] ($bytes.Length - $offset)",
+            "[Array]::Copy($bytes, $offset, $payload, 0, $payload.Length)",
+            "[System.IO.File]::WriteAllBytes($engine, $payload)",
+            "$proc = Start-Process -FilePath $engine -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', '/WEBUI=1', ('/DIR=\"{0}\"' -f $dir), '/TASKS=' -Wait -PassThru",
+            "if ($proc.ExitCode -notin 0, 3010) { throw \"DSH-X 安装失败，退出码 $($proc.ExitCode)\" }",
+            "Remove-Item $engine, $setup -Force -ErrorAction SilentlyContinue",
+            "@([Environment]::GetFolderPath('Programs'), [Environment]::GetFolderPath('CommonPrograms')) | ForEach-Object { Remove-Item (Join-Path $_ 'DSH-X') -Recurse -Force -ErrorAction SilentlyContinue }",
+            "Remove-Item 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{8F3C2A91-6B47-4E1D-9C5A-2D8E0F4B7A16}_is1' -Recurse -Force -ErrorAction SilentlyContinue"
+        ]
+    },
+    "uninstaller": {
+        "script": [
+            "$uninstaller = Join-Path $dir 'unins000.exe'",
+            "if (Test-Path $uninstaller) {",
+            "    $proc = Start-Process -FilePath $uninstaller -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART' -Wait -PassThru",
+            "    if ($proc.ExitCode -notin 0, 3010) { throw \"DSH-X 卸载失败，退出码 $($proc.ExitCode)\" }",
+            "}"
+        ]
+    },
+    "shortcuts": [
+        [
+            "DSH.exe",
+            "DSH-X"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/yyh-001/DSH-X"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/yyh-001/DSH-X/releases/download/v$version/DSH-Setup.exe"
+            }
+        }
+    }
+}
