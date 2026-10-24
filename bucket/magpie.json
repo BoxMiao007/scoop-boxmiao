@@ -1,6 +1,6 @@
 {
     "##": "上游仅发布未签名的独立 exe，资源名不含版本号；发布页同时提供 SHA256SUMS，hash 按架构逐行匹配。",
-    "version": "0.1.1421",
+    "version": "0.1.1436",
     "description": "本地 AI 网关：为 Codex、Claude Code 等编码 Agent 统一分配模型与账号，额度用尽自动切换",
     "homepage": "https://usemagpie.ai",
     "license": "MIT",
@@ -10,12 +10,12 @@
     ],
     "architecture": {
         "64bit": {
-            "url": "https://github.com/yetone/magpie/releases/download/v0.1.1421/magpie-windows-amd64.exe#/magpie.exe",
-            "hash": "5a6f174ad3f7a7c2e633c5af2f44ffc2252cddcf420149665d6d2044f1fa57b0"
+            "url": "https://github.com/yetone/magpie/releases/download/v0.1.1436/magpie-windows-amd64.exe#/magpie.exe",
+            "hash": "b1fd5d198e56290381c5a930d2daf250d36bb83d19a901286b3f574c6d4af4d7"
         },
         "arm64": {
-            "url": "https://github.com/yetone/magpie/releases/download/v0.1.1421/magpie-windows-arm64.exe#/magpie.exe",
-            "hash": "bc537654183f5197d638a96b8630e14cedc568a812ce35eb67f4e726dd2ca61e"
+            "url": "https://github.com/yetone/magpie/releases/download/v0.1.1436/magpie-windows-arm64.exe#/magpie.exe",
+            "hash": "67a6fcd7809bac6d748eccdccc78f5dd8e19e003428780348a8e6caad4c654a3"
         }
     },
     "bin": "magpie.exe",
