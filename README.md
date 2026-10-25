@@ -82,7 +82,7 @@ scoop uninstall cloakbrowser
 
 ## 自动更新
 
-本仓库通过 Excavator 每小时自动检查上游新版本并提交更新 PR，无需手动维护。[magpie](https://usemagpie.ai) 上游发版频繁，由独立的 [Excavator (magpie)](https://github.com/BoxMiao007/scoop-boxmiao/actions/workflows/excavator-magpie.yml) 工作流每 10 分钟单独检查。
+本仓库通过 Excavator 每小时自动检查上游新版本并提交更新 PR，无需手动维护。[magpie](https://usemagpie.ai) 上游发版频繁，由独立的 [Excavator (magpie)](https://github.com/BoxMiao007/scoop-boxmiao/actions/workflows/excavator-magpie.yml) 工作流每 15 分钟单独检查。
 
 ---
 

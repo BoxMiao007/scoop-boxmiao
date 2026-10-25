@@ -80,4 +80,4 @@ if (Test-Path $yaml) {
 
 本仓库通过 Excavator（GitHub Actions）每小时自动检查上游新版本，`checkver` 和 `autoupdate` 字段需配置正确。
 
-`magpie` 上游发版频繁（约 20 分钟一版），由 `.github/workflows/excavator-magpie.yml` 每 10 分钟单独检查：只跑该清单（`bin/checkver.ps1 -App magpie -Update`），无更新不提交，推送前 rebase 以避免与主 Excavator 冲突。新增同类高频应用时照此加独立工作流，不要整体调高主工作流的频率。
+`magpie` 上游发版频繁（约 20 分钟一版），由 `.github/workflows/excavator-magpie.yml` 每 15 分钟单独检查：只跑该清单（`bin/checkver.ps1 -App magpie -Update`），无更新不提交，推送前 rebase 以避免与主 Excavator 冲突。新增同类高频应用时照此加独立工作流，不要整体调高主工作流的频率。
