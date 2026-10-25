@@ -1,0 +1,24 @@
+name: 探针（临时，验证 schedule 是否派发）
+
+# 临时诊断文件：确认本仓库的 schedule 触发是否被 GitHub 派发。
+# 验证完成后立即删除，不要长期保留。
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    name: Echo
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 打印触发信息
+        shell: bash
+        run: |
+          echo "event=${{ github.event_name }}"
+          date -u
