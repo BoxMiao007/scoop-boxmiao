@@ -3,8 +3,8 @@ name: Excavator
 on:
   workflow_dispatch:
   schedule:
-    # run every 4 hours
-    - cron: '20 */4 * * *'
+    # run every hour (offset to minute 20 to avoid the top-of-hour rush)
+    - cron: '20 * * * *'
 
 permissions:
   contents: write
