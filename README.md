@@ -82,7 +82,7 @@ scoop uninstall cloakbrowser
 
 ## 自动更新
 
-本仓库通过 Excavator 每小时自动检查上游新版本并提交更新 PR，无需手动维护。
+本仓库通过 Excavator 自动检查上游新版本并提交更新 PR，无需手动维护。工作流配置为每小时检查一次，实际触发由 GitHub Actions 调度决定（公共仓库的 `schedule` 为尽力而为，实测约每天 4 次），如需立即检查可通过 `workflow_dispatch` 手动触发。
 
 ---
 

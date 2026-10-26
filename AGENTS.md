@@ -78,4 +78,6 @@ if (Test-Path $yaml) {
 
 ## 自动更新
 
-本仓库通过 Excavator（GitHub Actions）每小时自动检查上游新版本，`checkver` 和 `autoupdate` 字段需配置正确。
+本仓库通过 Excavator（GitHub Actions）自动检查上游新版本，`checkver` 和 `autoupdate` 字段需配置正确。
+
+工作流配置为每小时检查一次（`.github/workflows/excavator.yml`，`cron: '20 * * * *'`），但公共仓库的 `schedule` 是尽力而为调度：实测本账户被合并到约每天 4 次，且与同账户其他仓库的触发时间点对齐。这是 GitHub 侧的账户级限流，改 cron 无效，不要为此反复调整频率。需要立即检查时用 `workflow_dispatch` 手动触发：`gh workflow run excavator.yml`。
