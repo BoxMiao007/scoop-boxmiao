@@ -1,16 +1,16 @@
 {
-    "version": "0.1.62",
+    "version": "0.1.63",
     "description": "免费的全功能 Photoshop 替代品，支持 PSD/PSB、RAW 处理与本地 AI 功能",
     "homepage": "https://tenzen.studio/photon/",
     "license": "Proprietary",
     "architecture": {
         "64bit": {
-            "url": "https://downloads.tenzen.studio/photon/stable/win32/0.1.62/Photon-Studio-0.1.62-win-x64.exe#/dl.7z",
-            "hash": "c5becd44682faf7466849e495c3f9bbf768456294cc334eadbaeb5ede5553624"
+            "url": "https://downloads.tenzen.studio/photon/stable/win32/0.1.63/Photon-Studio-0.1.63-win-x64.exe#/dl.7z",
+            "hash": "4bee5b8fae382a9df327cd9cd349d9b9a105744007f93f7212eba3134746d361"
         },
         "arm64": {
-            "url": "https://downloads.tenzen.studio/photon/stable/win32/0.1.62/Photon-Studio-0.1.62-win-arm64.exe#/dl.7z",
-            "hash": "f9e59f78a7e065c1bf55682103b19271d43cfa58d3f0e17dd96be810be862ad5"
+            "url": "https://downloads.tenzen.studio/photon/stable/win32/0.1.63/Photon-Studio-0.1.63-win-arm64.exe#/dl.7z",
+            "hash": "2e1572082ec0a372aa282b68629caec6b7cfbaa1c1fbc4102c797af4afa3d35d"
         }
     },
     "installer": {
