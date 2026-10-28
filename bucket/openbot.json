@@ -1,0 +1,49 @@
+{
+    "version": "0.52.1",
+    "description": "本地优先的持久化 AI 智能体桌面工作台，为 Codex、Claude Code、Grok、OpenCode、Gemini 等 Agent 提供独立工作区、任务队列、文件传输与内置浏览器控制",
+    "homepage": "https://openbot.run/",
+    "license": "PolyForm Noncommercial 1.0.0",
+    "notes": "非商业许可，仅限非商业用途。Agent 默认以完全访问权限运行（danger-full-access、approvalPolicy: never），请仅运行可信任务。",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/nightly-labs/openbot/releases/download/v0.52.1/OpenBot-0.52.1-x64.exe#/dl.7z",
+            "hash": "574b099f2e56764e437f7a89f511de8c591f328ad23c915c6e0ed32f015d7266"
+        }
+    },
+    "installer": {
+        "script": [
+            "Get-Item -Path \"$dir\\`$PLUGINSDIR\\app*.7z\" | Expand-7zipArchive -DestinationPath \"$dir\"",
+            "Remove-Item -Path \"$dir\\`$*\", \"$dir\\Uninstall*\" -Recurse -Force"
+        ]
+    },
+    "post_install": [
+        "# 关掉内置更新，避免和 Scoop 的版本管理冲突",
+        "$yaml = \"$dir\\resources\\app-update.yml\"",
+        "if (Test-Path $yaml) {",
+        "    $content = Get-Content -Path $yaml | ForEach-Object {",
+        "        if ($_.StartsWith('url')) { \"$($_.Replace('url', '# url')) # Disabled by Scoop\" } else { $_ }",
+        "    }",
+        "    Set-Content $yaml -Value $content -Encoding ascii",
+        "}"
+    ],
+    "shortcuts": [
+        [
+            "OpenBot.exe",
+            "OpenBot"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/nightly-labs/openbot"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/nightly-labs/openbot/releases/download/v$version/OpenBot-$version-x64.exe#/dl.7z"
+            }
+        },
+        "hash": {
+            "url": "https://github.com/nightly-labs/openbot/releases/download/v$version/SHA256SUMS-windows.txt",
+            "regex": "(?m)^(?<hash>[0-9a-f]{64})\\s+OpenBot-[0-9.]+-x64\\.exe$"
+        }
+    }
+}
