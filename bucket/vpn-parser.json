@@ -1,13 +1,13 @@
 {
-    "version": "1.15.2",
+    "version": "1.15.3",
     "description": "Rust + egui 编写的跨平台代理工具，采集订阅、解析节点，驱动 Mihomo/sing-box/Xray 内核实测可用性与延迟",
     "homepage": "https://github.com/mateo-ki/vpn-parser",
     "license": "MIT",
     "innosetup": true,
     "architecture": {
         "64bit": {
-            "url": "https://github.com/mateo-ki/vpn-parser/releases/download/v1.15.2/vpn-parser-1.15.2-windows-x64-setup.exe",
-            "hash": "34c472ac1688f96f9a7ce8732e66a27144d30613a28b8fac9807f2e502c84e06"
+            "url": "https://github.com/mateo-ki/vpn-parser/releases/download/v1.15.3/vpn-parser-1.15.3-windows-x64-setup.exe",
+            "hash": "a46f8a96b90f3627e457421cd33691a9bc878c2fb55c9c9ca6eb4f6f076d48d2"
         }
     },
     "bin": "vpn-parser.exe",
