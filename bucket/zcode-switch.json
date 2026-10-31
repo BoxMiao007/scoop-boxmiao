@@ -1,12 +1,12 @@
 {
-    "version": "1.6.0",
+    "version": "1.7.1",
     "description": "在多个 ZCode 账号之间一键切换，自动显示额度",
     "homepage": "https://github.com/pjpv/zcode-switch",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/pjpv/zcode-switch/releases/download/v1.6.0/zcode-switch_1.6.0_portable.exe",
-            "hash": "d080749a14016969c214c565078e220a0a7d518558afb389835e90feff8aef96"
+            "url": "https://github.com/pjpv/zcode-switch/releases/download/v1.7.1/zcode-switch_1.7.1_portable.exe",
+            "hash": "7e1a453248708649f4a9734c58b52623872e0d013625a053b4627d256ce7ec75"
         }
     },
     "bin": [
