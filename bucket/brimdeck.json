@@ -1,0 +1,43 @@
+{
+    "##": "上游便携包内含 BrimDeck.portable 文件清单，程序据此就地替换自身文件完成应用内更新。Scoop 负责版本管理，pre_install 删除该清单，使应用内更新入口改为打开下载页。",
+    "version": "1.2.3",
+    "description": "Windows 11 灵动岛小组件，在屏幕顶部集中显示 AI 编程工具额度与用量、音乐播放控制和系统监控",
+    "homepage": "https://github.com/MoFeng2223/BrimDeck",
+    "license": "Apache-2.0",
+    "notes": [
+        "需要 Windows 11 x64；Windows 10 2004 及以上仅有限支持。",
+        "请用 scoop update brimdeck 升级：应用内更新已禁用，设置 › 关于 中的更新入口只打开下载页。",
+        "设置和数据保存在 %LOCALAPPDATA%\\BrimDeck。如开启了开机自启动，卸载前先在设置中关闭，避免留下失效的启动项。"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/MoFeng2223/BrimDeck/releases/download/v1.2.3/BrimDeck-1.2.3-Portable-x64.zip",
+            "hash": "5912671976276ec6794730a3b910eb6ad78208b9314f8fd0ae259d307f49f9ac"
+        }
+    },
+    "extract_dir": "BrimDeck",
+    "pre_install": [
+        "# 去掉便携标记，避免应用内更新覆盖 Scoop 管理的版本目录",
+        "Remove-Item \"$dir\\BrimDeck.portable\" -Force -ErrorAction SilentlyContinue"
+    ],
+    "shortcuts": [
+        [
+            "BrimDeck.exe",
+            "BrimDeck"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/MoFeng2223/BrimDeck"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/MoFeng2223/BrimDeck/releases/download/v$version/BrimDeck-$version-Portable-x64.zip",
+                "hash": {
+                    "url": "https://github.com/MoFeng2223/BrimDeck/releases/download/v$version/SHA256SUMS.txt",
+                    "regex": "([a-fA-F0-9]{64})\\s+BrimDeck-$version-Portable-x64\\.zip"
+                }
+            }
+        }
+    }
+}
