@@ -1,11 +1,11 @@
 {
-    "##": "上游便携版靠程序目录中的 nyaterm-portable 标记文件启用便携模式，设置、会话与密钥都存放在同目录的 data 子目录。这里用 extract_dir 展开 NyaTerm-portable，并 persist data，使 scoop update 后数据保留；保留标记文件意味着应用内更新会就地替换程序文件（只替换程序本体与 helper，不动 data）。",
+    "##": "上游便携版靠程序目录中的 nyaterm-portable 标记文件启用便携模式，设置、会话与密钥都存放在同目录的 data 子目录。不能用 extract_dir 展开：包根目录 NyaTerm-portable 与标记文件 nyaterm-portable 仅大小写不同，Scoop 展开时用 robocopy 把子目录内容上移，会因同名冲突把标记文件留在子目录，程序于是按非便携模式运行。因此保留 NyaTerm-portable 这一层，persist 其 data，快捷方式也带上该目录。",
     "version": "2.0.0",
     "description": "现代远程终端工作区，集成 SSH、Telnet、串口、SFTP、RDP/VNC 会话、隧道与内置 AI 助手",
     "homepage": "https://nyaterm.app",
     "license": "Apache-2.0",
     "notes": [
-        "便携模式安装：设置、会话、密钥与日志都在 data 目录，已由 Scoop persist 到 persist\\nyaterm\\data，卸载时不会自动删除。",
+        "便携模式安装：设置、会话、密钥与日志都在程序目录的 data 子目录，已由 Scoop persist 到 persist\\nyaterm\\NyaTerm-portable\\data，卸载时不会自动删除。",
         "上游 Windows 构建未签名，首次运行可能出现 SmartScreen 提示。",
         "应用内更新（帮助 → 检查更新）会就地替换程序文件，Scoop 记录的版本号不会同步变化；升级优先用 scoop update nyaterm。"
     ],
@@ -19,11 +19,10 @@
             "hash": "1b19549e5623745dbf6eb80eaffc0f983ca9c18842e16ccc9ec914526dcce305"
         }
     },
-    "extract_dir": "NyaTerm-portable",
-    "persist": "data",
+    "persist": "NyaTerm-portable\\data",
     "shortcuts": [
         [
-            "NyaTerm.exe",
+            "NyaTerm-portable\\NyaTerm.exe",
             "NyaTerm"
         ]
     ],
