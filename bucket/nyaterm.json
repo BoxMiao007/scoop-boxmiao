@@ -1,0 +1,51 @@
+{
+    "##": "上游便携版靠程序目录中的 nyaterm-portable 标记文件启用便携模式，设置、会话与密钥都存放在同目录的 data 子目录。这里用 extract_dir 展开 NyaTerm-portable，并 persist data，使 scoop update 后数据保留；保留标记文件意味着应用内更新会就地替换程序文件（只替换程序本体与 helper，不动 data）。",
+    "version": "2.0.0",
+    "description": "现代远程终端工作区，集成 SSH、Telnet、串口、SFTP、RDP/VNC 会话、隧道与内置 AI 助手",
+    "homepage": "https://nyaterm.app",
+    "license": "Apache-2.0",
+    "notes": [
+        "便携模式安装：设置、会话、密钥与日志都在 data 目录，已由 Scoop persist 到 persist\\nyaterm\\data，卸载时不会自动删除。",
+        "上游 Windows 构建未签名，首次运行可能出现 SmartScreen 提示。",
+        "应用内更新（帮助 → 检查更新）会就地替换程序文件，Scoop 记录的版本号不会同步变化；升级优先用 scoop update nyaterm。"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/nyakang/nyaterm/releases/download/v2.0.0/NyaTerm_2.0.0_windows_x64_portable.zip",
+            "hash": "68b7d9fe746e65ce1e05b3ba69acff8bdb4cb303c3e238f532061995e0631b18"
+        },
+        "arm64": {
+            "url": "https://github.com/nyakang/nyaterm/releases/download/v2.0.0/NyaTerm_2.0.0_windows_arm64_portable.zip",
+            "hash": "1b19549e5623745dbf6eb80eaffc0f983ca9c18842e16ccc9ec914526dcce305"
+        }
+    },
+    "extract_dir": "NyaTerm-portable",
+    "persist": "data",
+    "shortcuts": [
+        [
+            "NyaTerm.exe",
+            "NyaTerm"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/nyakang/nyaterm"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/nyakang/nyaterm/releases/download/v$version/NyaTerm_$version_windows_x64_portable.zip",
+                "hash": {
+                    "url": "https://github.com/nyakang/nyaterm/releases/download/v$version/SHA256SUMS",
+                    "regex": "([a-fA-F0-9]{64})\\s+NyaTerm_$version_windows_x64_portable\\.zip"
+                }
+            },
+            "arm64": {
+                "url": "https://github.com/nyakang/nyaterm/releases/download/v$version/NyaTerm_$version_windows_arm64_portable.zip",
+                "hash": {
+                    "url": "https://github.com/nyakang/nyaterm/releases/download/v$version/SHA256SUMS",
+                    "regex": "([a-fA-F0-9]{64})\\s+NyaTerm_$version_windows_arm64_portable\\.zip"
+                }
+            }
+        }
+    }
+}

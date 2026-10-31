@@ -58,6 +58,7 @@ scoop uninstall cloakbrowser
 
 | 应用 | 说明 |
 |------|------|
+| [NyaTerm](https://nyaterm.app) | 现代远程终端工作区，集成 SSH、Telnet、串口、SFTP、RDP/VNC 会话、隧道与内置 AI 助手 |
 | [Pebrel](https://github.com/Kuddev/pebrel) | AI 原生 GPU 加速终端模拟器，集成 SSH、持久会话、分屏与 AI CLI 工作流 |
 | [Rscoop](https://github.com/AmarBego/Rscoop) | Scoop 的桌面应用程序。无需进入终端即可搜索、安装、更新和管理 Windows 软件包 |
 
